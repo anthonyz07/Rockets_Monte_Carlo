@@ -1,0 +1,6 @@
+.vscode/
+/myenv/
+.DS_Store
+Scripts/Los Angeles SEC.tif
+__pycache__/
+*.pyc
