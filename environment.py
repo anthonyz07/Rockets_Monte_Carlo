@@ -1748,7 +1748,7 @@ class Environment:
         self.time_array = time_array
         self.height = altitude_array
 
-    def process_wyoming_sounding(self, file): #Last modified 10/22/26
+    def process_wyoming_sounding(self, file): #Last modified 10/29/26
         """Import and process the upper air sounding data from `Wyoming
         Upper Air Soundings` database given by the url in file. Sets
         pressure, temperature, wind-u, wind-v profiles and surface elevation.
@@ -1816,7 +1816,6 @@ class Environment:
             interpolation="linear",
         )
         # Retrieve wind-u and wind-v from data array
-        data_array[:, 7] = data_array[:, 7] * 1.852 / 3.6  # Converts Knots to m/s
         data_array[:, 5] = (
             data_array[:, 6] + 180
         ) % 360  # Convert wind direction to wind heading
