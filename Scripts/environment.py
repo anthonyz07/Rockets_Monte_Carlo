@@ -1806,7 +1806,6 @@ class Environment:
             interpolation="linear",
             extrapolation="natural",
         )
-
         # Retrieve temperature from data array
         data_array[:, 2] = data_array[:, 2] + 273.15  # Converts C to K
         self.temperature = Function(
@@ -1816,6 +1815,7 @@ class Environment:
             interpolation="linear",
         )
         # Retrieve wind-u and wind-v from data array
+        # data_array[:, 7] = data_array[:, 7] * 1.852 / 3.6  # No longer needed due to website changes
         data_array[:, 5] = (
             data_array[:, 6] + 180
         ) % 360  # Convert wind direction to wind heading
@@ -1890,7 +1890,6 @@ class Environment:
         """
         # Request NOAA Ruc Sounding from file url
         response = self.__fetch_noaaruc_sounding(file)
-
         # Split response into lines
         lines = response.text.split("\n")
 
