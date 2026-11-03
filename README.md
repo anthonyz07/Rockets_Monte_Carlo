@@ -2,7 +2,7 @@
 
 These scripts use **RocketPy**, an open-source Python library for high-power rocket trajectory simulation.
 
-RocketPy supports full 6-DOF flight simulations, including motor performance, aerodynamics, parachute descent, and realistic atmospheric conditions. It also includes built-in tools for Monte Carlo analysis, making it well-suited for landing dispersion studies. :contentReference[oaicite:0]{index=0}
+RocketPy supports full 6-DOF flight simulations, including motor performance, aerodynamics, parachute descent, and realistic atmospheric conditions. It also includes built-in tools for Monte Carlo analysis, making it well-suited for landing dispersion studies. 
 
 The documentation is well-developed and covers most use cases, including environment setup, flight simulation, and dispersion analysis:
 
@@ -13,16 +13,30 @@ This repository provides example scripts built on top of RocketPy to run dispers
 If you have any questions about these scripts or how to use them, please reach out:
 
 mariacuevasabad@gmail.com
+## Setup
+
+Make sure you are using **Python 3.12 or newer**.
+
+I recommend using Visual Studio Code as your development environment. Once installed, download the following extensions:
+
+Python extension for Visual Studio Code
+https://marketplace.visualstudio.com/items?itemName=ms-python.python
+
+Jupyter extension for Visual Studio Code 
+https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter
+
+This setup makes it much easier to run and debug scripts, especially if you are working with notebooks or running multiple simulations.
 
 ## Editing RocketPy Source (`flight.py`)
 
 > **Important:** RocketPy hardcodes the simulation `max_time` to **600 seconds**. For cases such as *main-only recovery*, this is not sufficient and can truncate the trajectory before landing. This value must be increased to properly capture full descent and landing dispersion.
 
-To modify this, edit the RocketPy source inside your conda environment. The exact environment name and file paths will depend on your setup; the example below shows a typical workflow.
+To modify this, edit the RocketPy source code installed on your system. The exact file path will depend on your Python installation, but the steps below show a typical workflow.
 
-Activate your environment:
+Install RocketPy from the terminal if you have not already:
+
 ```bash
-conda activate rocketpy312
+pip install rocketpy
 ```
 
 Locate where RocketPy is installed:
@@ -73,17 +87,52 @@ The launch environment is defined using geographic location and real atmospheric
 
 An `Environment` object is created using these values.
 
-Instead of using a standard atmosphere model, real atmospheric data is loaded from a Wyoming sounding:
+Instead of using a standard atmosphere model, atmospheric profiles are obtained from the University of Wyoming sounding database:  
+https://weather.uwyo.edu/upperair/sounding_legacy.html
 
-- Source: University of Wyoming weather balloon (radiosonde) data  
-- Station: 72393 (Vandenberg)  
-- Date: May 30, 2025 at 12 UTC  
+Vandenberg (station **72393**) is used because it is geographically close to the launch site, making it a reasonable approximation of local atmospheric conditions.
 
-Atmospheric data link:
-https://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2025&MONTH=05&FROM=3012&TO=3012&STNM=72393
+These soundings provide altitude-dependent profiles of:
+- Temperature  
+- Pressure  
+- Wind speed and direction  
 
-Vandenberg is used because it is geographically close to the launch site, making it a reasonable approximation of local atmospheric conditions.
 
-This dataset provides altitude-dependent profiles of temperature, pressure, and wind, which are used in the simulation instead of a standard atmosphere model.
+---
 
-Note: This link can be modified to use different dates, times, or stations depending on the desired conditions.
+### How to Select a Sounding
+
+1. Open the Wyoming sounding page.
+2. Set:
+   - **Region**: North America  
+   - **Type of plot**: Text: List  
+   - **Station Number**: `72393` (Vandenberg)  
+
+3. Choose your desired:
+   - **Year**
+   - **Month**
+   - **Day + Time** (00Z or 12Z)
+
+4. Hit enter on your keyboard.
+
+--
+
+### Updating the Simulation
+
+After generating a sounding, copy the resulting URL and update your atmospheric input in your configuration file (e.g., `rocket_params.py`).
+
+For example:
+
+```bash
+self.atmosphere_file = "https://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2026&MONTH=04&FROM=0212&TO=0212&STNM=72672"
+```
+### Selecting Realistic Atmospheric Conditions (FAR Site)
+
+To guide the date selection based on specific criteria, historical surface weather data can be used.
+
+A useful reference is:  
+https://www.wunderground.com/dashboard/pws/KCACANTI2/table/2026-03-2/2026-03-2/daily  
+
+This corresponds to a personal weather station near the FAR launch site (Randsburg, CA), which provides historical observations such as wind speed, direction, and temperature.
+
+Navigate to the **monthly view**, then select **table** to see daily averages (e.g., wind speeds). Based on this, choose a representative date and use it in the Wyoming sounding tool to retrieve the corresponding atmospheric profile.
