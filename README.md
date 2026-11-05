@@ -12,7 +12,8 @@ This repository provides example scripts built on top of RocketPy to run dispers
 
 If you have any questions about these scripts or how to use them, please reach out:
 
-mariacuevasabad@gmail.com
+az2956@columbia.edu
+Originated by Maria C.
 ## Setup
 
 Make sure you are using **Python 3.12 or newer**.
