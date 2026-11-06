@@ -1,6 +1,9 @@
 .vscode/
-/myenv/
 .DS_Store
 Scripts/Los Angeles SEC.tif
 __pycache__/
 *.pyc
+Scripts/landing_dispersion.errors.txt
+Scripts/landing_dispersion.inputs.txt
+Scripts/landing_dispersion.outputs.txt
+Scripts/main_drogue_impacts_uw.csv
