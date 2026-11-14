@@ -33,3 +33,25 @@ def compile_errors(impact, cord):
         
         for key in cord:
             file.write("Shock Error: cord experienced " + str(cord[key][0]) + " N, " + "speed was " + str(cord[key][1]) + " m/s " + str(cord[key][2]) + "\n")
+    
+
+#test cases
+compile_errors({"Landing": [10, 12345]}, {"Shock": [50, 20, 67890]})
+
+compile_errors({"Landing": [15, 67890]}, {"Shock": [60, 25, 12345]})
+
+compile_errors({"Landing": [0, 12345]}, {"Shock": [0, 0, 67890]})
+
+compile_errors({"Landing": [-10, 12345]}, {"Shock": [-50, -20, 67890]})
+
+compile_errors({"Landing": [1000000, 12345]}, {"Shock": [1000000, 1000000, 67890]})
+
+compile_errors({"Landing": [1, 1]}, {"Shock": [1, 1, 1]})
+
+compile_errors({"Landing": [9.81, 54321]}, {"Shock": [9.81, 9.81, 54321]})
+
+compile_errors({"Landing": [0.5, 99999]}, {"Shock": [0.5, 0.5, 99999]})
+
+compile_errors({"Landing": [50, 11111]}, {"Shock": [100, 75, 22222]})
+
+compile_errors({"Landing": [75, 22222]}, {"Shock": [150, 100, 11111]})
