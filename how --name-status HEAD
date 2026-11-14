@@ -1,0 +1,8 @@
+[33mcommit 624f5807f732e15c858af9085b373c9f71be8699[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mjuliajurui/compileErrors[m[33m, [m[1;31morigin/juliajurui/compileErrors[m[33m)[m
+Author: Julia Zhang <jzhang.ocean@gmail.com>
+Date:   Fri Nov 13 22:38:34 2026 -0500
+
+    compile errors method, deleted error_analysis.txt file from test cases
+
+ Scripts/error_analysis.txt | 20 [31m--------------------[m
+ 1 file changed, 20 deletions(-)
