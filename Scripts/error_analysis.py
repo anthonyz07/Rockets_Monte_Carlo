@@ -49,7 +49,19 @@ def cord_errors(file_name):
 # Lists reason of failure (If landing, lists speed. If shock, lists shock force + speed)
 
 def compile_errors(impact, cord):
-    return 0
+    #create error_analysis.txt file with open() method
+    file_path = "error_analysis.txt"
+
+    with open(file_path, "a") as file:
+        #"a" stands for append, we want to add to the file instead of overwriting what's already in the file
+        #create file if it does not already exist
+
+        #traverse through dictionary
+        for key in impact: #impact dictionary has format {"Landing": [speed, simulation]}
+            file.write("Landing Error: speed was " + str(impact[key][0]) + " m/s " + str(impact[key][1]) + "\n")
+        
+        for key in cord: #cord dictionary has format {"Shock": [force, speed, simulation]}
+            file.write("Shock Error: cord experienced " + str(cord[key][0]) + " N, " + "speed was " + str(cord[key][1]) + " m/s " + str(cord[key][2]) + "\n")
 
 
 impact_errors("landing_dispersion_main_only.outputs.txt")
