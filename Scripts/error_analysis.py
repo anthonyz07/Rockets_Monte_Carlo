@@ -1,15 +1,13 @@
-# Reads landing_dispersion_main_only and checks impact velocity. 
-# If, for a simulation, it is too high, it will remove that data point
-# Returns a dictionary of the removed data points. 
-# Key = Parachute Area
-
 import json
 from pathlib import Path
 
-max_acceptable_landing_velocity = -5 # negative because going down, max means -4 is too much velocity or speed
+# Reads landing_dispersion_main_only and checks impact velocity. 
+# If, for a simulation, it is too high, it will remove that data point
+# Returns a dictionary of the removed data points. 
+# Key = Monte Carlo Index. Value == [speed, simulation]
 
 def impact_errors(file_name):
-
+    max_acceptable_landing_velocity = -5 # negative because going down, max means -4 is too much velocity or speed
     returndict = {}
 
     # this just makes the file path relative to the script, otherwise its an absolute path relative to the terminal
@@ -39,10 +37,10 @@ def impact_errors(file_name):
 # Reads landing_dispersion_main_only and checks speed when main opens. 
 # If, for a simulation, speed was too high (force analysis)
 # Returns a dictionary of the removed data points 
-# Key = Parachute Area
+# Key = Monte Carlo Index. Value == [Shock Force, speed, simulation]
 
 def cord_errors(file_name):
-    return 0
+    return {}
 
 # Takes both dictionaries from shock and landing errors
 # Compiles errors into a document "error_analysis.txt"
