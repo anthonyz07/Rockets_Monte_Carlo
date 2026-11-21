@@ -56,10 +56,12 @@ def compile_errors(impact, cord):
 
         #traverse through dictionary
         for key in impact: #impact dictionary has format {"Landing": [speed, simulation]}
-            file.write("Landing Error: speed was " + str(impact[key][0]) + " m/s " + str(impact[key][1]) + "\n")
+            file.write("Landing Error: speed was " + str(impact[key][0]) + " m/s " + str(impact[key][1]))
+            file.write("\n") #\n on different line to avoid string overflow + improve runtime
         
         for key in cord: #cord dictionary has format {"Shock": [force, speed, simulation]}
-            file.write("Shock Error: cord experienced " + str(cord[key][0]) + " N, " + "speed was " + str(cord[key][1]) + " m/s " + str(cord[key][2]) + "\n")
+            file.write("Shock Error: cord experienced " + str(cord[key][0]) + " N, " + "speed was " + str(cord[key][1]) + " m/s " + str(cord[key][2]))
+            file.write("\n")
 
 
 impact_errors("landing_dispersion_main_only.outputs.txt")
